@@ -79,16 +79,17 @@ const BlogDetails = () => {
                             />
                         </Link>
                         <img 
-                            onClick={() => deleteBlog(blog._id)}
+                            onClick={deleteBlog}
                             className='cursor-pointer' 
                             src={deleteIcon} 
                             alt="Delete Icon" 
                         />
+
                     </>
                 )}
             </div>
             <div className='flex items-center justify-between mt-3'>
-                <p>{blog.userId.name}</p>
+                <p>{blog.userId?.name}</p>
                 <div className='flex gap-3'>
                     <p>{new Date(blog.createdAt).toLocaleString()}</p>
                 </div>
