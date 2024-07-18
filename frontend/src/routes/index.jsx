@@ -31,7 +31,7 @@ export default function index() {
           },
           {
             path : "/blogs/:id", //http://localhost:5173/blogs/:id
-            element : <BlogDetails/>
+            element : user ? <BlogDetails/> : <Navigate to={'/login'}/>
           },
           {
             path : "/search/:term", //http://localhost:5173/blogs/search/:id
