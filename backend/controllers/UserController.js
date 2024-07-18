@@ -29,16 +29,26 @@ const UserController = {
     },
     login : async (req, res) => {
         try {
-            let { email, password } = req.body;
-            let user = await User.login(email, password);
+        let { email, password } = req.body;
+        let user = await User.login(email, password);
 
-            let token = createToken(user._id);
-            res.cookie('jwt', token, { httpOnly : true, maxAge : 3 * 24 * 60 * 60 * 1000 });
+        let token = createToken(user._id);
 
-            return res.json({user, token});
-        } catch (e) {
-            return res.status(400).json({ error: e.message});
-        }
+        // Set the cookie with the token
+        res.cookie('jwt', token, { 
+            httpOnly: true, 
+            secure: process.env.NODE_ENV === 'production', // Use secure cookies in production
+            sameSite: process.env.NODE_ENV === 'production' ? 'None' : 'Lax', // Ensure compatibility with cross-site cookies in production
+            maxAge: 3 * 24 * 60 * 60 * 1000 // 3 days
+        });
+
+        console.log('Login successful, token set in cookie:', token); // Debugging log
+
+        return res.json({ user, token });
+    } catch (e) {
+        console.error('Login failed:', e); // Debugging log
+        return res.status(400).json({ error: e.message });
+    }
     },
     register : async (req, res) => {
         try {
