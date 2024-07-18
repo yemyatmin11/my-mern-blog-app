@@ -32,6 +32,7 @@ const AuthContextProvider = ({ children }) => {
                 }
             }) 
         } catch (e) {
+            console.error('Failed to fetch user:', err);
             dispatch({ type : 'LOGOUT'});
         }
     }, [])
