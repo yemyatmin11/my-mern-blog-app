@@ -21,12 +21,10 @@ mongoose.connect(mongoURL).then(() => {
     })
 })
 
-app.use(cors(
-    {
-        origin : "http://localhost:5173",
-        credentials : true
-    }
-));
+app.use(cors({
+    origin: ["http://localhost:5173", "https://my-mern-blog-app-frontend.onrender.com"],
+    credentials: true
+}));
 app.use(express.json());
 app.use(morgan('dev'));
 app.use(cookieParser());
