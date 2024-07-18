@@ -47,7 +47,7 @@ const BlogDetails = () => {
     }, [id])
     
 
-    if (!blog && !user) {
+    if (!blog) {
         return <div>Loading...</div>;
     };
 
